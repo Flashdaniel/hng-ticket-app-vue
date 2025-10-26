@@ -47,9 +47,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
-import { useRouter } from "vue-router";
-import MainLayout from "../components/MainLayout.vue";
 import { useAuthStore } from "../stores/auth";
+import MainLayout from "../components/MainLayout.vue";
 
 export default defineComponent({
   name: "LoginPage",
@@ -57,7 +56,6 @@ export default defineComponent({
     MainLayout,
   },
   setup() {
-    const router = useRouter();
     const auth = useAuthStore();
     const isSubmitting = ref(false);
 
@@ -69,10 +67,12 @@ export default defineComponent({
     const errors = reactive({
       email: "",
       password: "",
+      general: "",
     });
 
     const validateForm = () => {
       let isValid = true;
+      errors.general = "";
 
       if (!formData.email) {
         errors.email = "Email is required";
